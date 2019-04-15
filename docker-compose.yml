@@ -33,7 +33,7 @@ services:
       - ./web:/web-app
       - ./web/package.json:/web-app/package.json
       - ./web/yarn.lock:/web-app/yarn.lock
-      - /web-app/node_modules
+      - ./web-app/node_modules
     ports:
       - "3000:3000"
     restart: always
@@ -46,7 +46,7 @@ services:
       - ./cron-lighthouse:/cron-lighthouse-app
       - ./cron-lighthouse/package.json:/cron-lighthouse-app/package.json
       - ./cron-lighthouse/yarn.lock:/cron-lighthouse-app/yarn.lock
-      - /cron-lighthouse-app/node_modules
+      - ./cron-lighthouse-app/node_modules
     ports:
       - "3001:3001"
     depends_on:
