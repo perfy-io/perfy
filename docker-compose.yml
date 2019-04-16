@@ -46,7 +46,6 @@ services:
       - ./cron-lighthouse:/cron-lighthouse-app
       - ./cron-lighthouse/package.json:/cron-lighthouse-app/package.json
       - ./cron-lighthouse/yarn.lock:/cron-lighthouse-app/yarn.lock
-      - ./cron-lighthouse-app/node_modules
     ports:
       - "3001:3001"
     depends_on:
