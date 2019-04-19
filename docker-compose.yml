@@ -23,7 +23,6 @@ services:
       - /hub-app/node_modules
     depends_on:
       - db
-    restart: always
 
   perfy.web:
     build:
@@ -33,10 +32,8 @@ services:
       - ./web:/web-app
       - ./web/package.json:/web-app/package.json
       - ./web/yarn.lock:/web-app/yarn.lock
-      - ./web-app/node_modules
     ports:
       - "3000:3000"
-    restart: always
 
   perfy.cron_lighthouse:
     build:
@@ -50,7 +47,6 @@ services:
       - "3001:3001"
     depends_on:
       - db
-    restart: always
 
   db:
     image: mongo
@@ -60,4 +56,3 @@ services:
       - 27017:27017
     volumes:
       - ./db:/data/db
-    restart: always
