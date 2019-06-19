@@ -2,14 +2,16 @@ version: "3"
 
 services:
   perfy.hub:
+    build:
+      context: ./hub
     depends_on:
       - db
-    environment:
-      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:@db:5432/postgres
-      HASURA_GRAPHQL_ENABLE_CONSOLE: "false"
-    image: hasura/graphql-engine:v1.0.0-beta.2
+    env_file: ./hub/.env
     ports:
       - 8080:8080
+    restart: always
+    volumes:
+      - ./hub:/hub-app
 
   perfy.web:
     build:
