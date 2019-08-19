@@ -1,11 +1,11 @@
 version: "3"
 
 services:
-  perfy.hub:
+  v1.hub:
     build:
       context: ./hub
     depends_on:
-      - db
+      - v1.db
     env_file: ./hub/.env
     ports:
       - 8080:8080
@@ -13,13 +13,13 @@ services:
     volumes:
       - ./hub:/hub-app
 
-  perfy.web:
+  v1.web:
     build:
       context: ./web
     command: yarn dev
     depends_on:
-      - perfy.hub
-      - perfy.authentication
+      - v1.hub
+      - v1.authentication
     volumes:
       - ./web:/web-app
       - ./web/package.json:/web-app/package.json
@@ -27,12 +27,12 @@ services:
     ports:
       - "3000:3000"
 
-  perfy.cron_lighthouse:
+  v1.cron_lighthouse:
     build:
       context: ./cron-lighthouse
     command: yarn dev
     depends_on:
-      - db
+      - v1.db
     volumes:
       - ./cron-lighthouse:/cron-lighthouse-app
       - ./cron-lighthouse/package.json:/cron-lighthouse-app/package.json
@@ -40,12 +40,13 @@ services:
     ports:
       - "3001:3001"
 
-  perfy.authentication:
+  v1.authentication:
     build:
       context: ./authentication
     command: yarn dev
+    env_file: ./authentication/.env
     depends_on:
-      - db
+      - v1.db
     ports:
       - "3030:3030"
     volumes:
@@ -53,7 +54,7 @@ services:
       - ./authentication/package.json:/authentication-app/package.json
       - ./authentication/yarn.lock:/authentication-app/yarn.lock
 
-  db:
+  v1.db:
     image: postgres:11.3-alpine
     restart: always
     volumes:
